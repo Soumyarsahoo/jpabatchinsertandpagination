@@ -5,6 +5,9 @@ import com.abc.repository.CsvRepo;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -44,6 +47,16 @@ public class CsvParser {
             List<CsvEntity> bean1 = beans.subList(i, i + batchSize);
             System.out.println("bean1.size() = " + bean1.size());
             repository.saveAll(bean1);
+        }
+    }
+
+    public Page<CsvEntity> getRecordsByPagination(Pageable pageable){
+        Page<CsvEntity> iterable = repository.findAll(pageable);
+        if(iterable.isEmpty()){
+            throw new RuntimeException("No records found");
+        }else{
+            //return iterable.stream().toList();
+            return iterable;
         }
     }
 }

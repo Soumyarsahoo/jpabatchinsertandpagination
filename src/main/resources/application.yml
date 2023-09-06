@@ -1,6 +1,6 @@
 spring:
  datasource:
-   url: jdbc:h2:mem:testdb
+   url: jdbc:h2:file:/data/demo
    driverClassName: org.h2.Driver
    username: sa
    password: password
@@ -17,4 +17,5 @@ spring:
     enabled: true
 
 #spring.datasource.url=jdbc:h2:file:/data/demo - for file based storage
+#spring.datasource.url=jdbc:h2:mem:testdb  - for inmemory storage
 
